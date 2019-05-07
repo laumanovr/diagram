@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+
+  .content {
+    width: 100%;
+  }
+
+  .filter {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .tabs {
+    margin-right: 20px;
+  }
+
+  .tab {
+    background: #f3f3f3;
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &.active {
+      background: #00BCD4;
+      color: white;
+    }
+  }
+}
