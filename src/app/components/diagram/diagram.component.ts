@@ -12,7 +12,7 @@ import { Chart } from 'chart.js';
 export class DiagramComponent implements OnInit {
   public dates = [];
   public degrees = [];
-  public chart = [];
+  public chart = Chart;
   public selectDates = [];
   public dateFrom: number;
   public dateTo: number;
@@ -39,6 +39,9 @@ export class DiagramComponent implements OnInit {
     this.dates = [];
     this.degrees = [];
     this.activeTab = 'temp';
+    if (this.chart['ctx']) {
+      this.chart.destroy();
+    }
     this.diagramService.getTemperature().subscribe((resp) => {
       resp.forEach((item) => {
         this.dates.push(item['t']);
@@ -55,6 +58,7 @@ export class DiagramComponent implements OnInit {
     this.dates = [];
     this.degrees = [];
     this.activeTab = 'precip';
+    this.chart.destroy();
     Array.from(document.querySelectorAll('select')).forEach(select => { select.selectedIndex = 0; });
     this.diagramService.getPrecipitation().subscribe((resp) => {
       resp.forEach((item) => {
@@ -69,6 +73,7 @@ export class DiagramComponent implements OnInit {
     if ((this.dateFrom && this.dateTo) !== undefined) {
       this.dates = [];
       this.degrees = [];
+      this.chart.destroy();
 
       if (this.activeTab === 'temp') {
         this.diagramService.getTemperature().subscribe((resp) => {
