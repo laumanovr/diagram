@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="tabs">
+    <div class="tab" [ngClass]="{'active': activeTab === 'temp'}" (click)="getTemperatures()">Temperatures</div>
+    <div class="tab" [ngClass]="{'active': activeTab === 'precip'}" (click)="getPrecipitations()">Precipitation</div>
+  </div>
+
+  <div class="content">
+    <div class="filter">
+      <select [(ngModel)]="dateFrom">
+        <option value="" [selected]="true"> Please select</option>
+        <option *ngFor="let option of selectDates" [ngValue]="option">{{ option }}</option>
+      </select>
+
+      <select [(ngModel)]="dateTo">
+        <option value="" [selected]="true"> Please select</option>
+        <option *ngFor="let option of selectDates">{{ option }}</option>
+      </select>
+
+      <button (click)="getFilteredData()">Submit</button>
+    </div>
+
+    <div *ngIf="chart" class="chart">
+      <canvas id="canvas">{{ chart }}</canvas>
+    </div>
+  </div>
+</div>
